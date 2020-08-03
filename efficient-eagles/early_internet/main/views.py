@@ -1,7 +1,7 @@
 from django.views.generic import View, TemplateView
 from django.shortcuts import render, redirect
 from django.contrib import auth
-
+from main.models import Post
 from main.forms import CustomUserCreationForm
 
 
@@ -55,3 +55,8 @@ class LogoutView(View):
     def get(self, request):
         auth.logout(request)
         return redirect('home')
+
+class PostView(TemplateView):
+    def get(self, request, id):
+        post = Post.objects.first()
+        return  render(request, 'main.html')
